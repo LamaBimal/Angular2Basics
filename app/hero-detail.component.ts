@@ -1,9 +1,14 @@
 /**
  * Created by bimal on 11/19/16.
  */
-import {Component, Input} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Location} from '@angular/common';
+import {HeroService} from  './hero.service';
+import 'rxjs/add/operator/switchMap';
 import {Hero} from './hero';
 @Component({
+    moduleId:module.id,
     selector:'my-hero-detail',
     template:`
         <div *ngIf="heros">
@@ -13,10 +18,23 @@ import {Hero} from './hero';
         <label>name :</label>
         <input type="text" name="name" [(ngModel)]="heros.name">
 </div>
+<button (click)="goBack()">Back</button>
 </div>
 `
 })
-export class HeroDetailComponent{
-    @Input()
-    heros:Hero
+export class HeroDetailComponent implements OnInit{
+    constructor(
+        private heroService:HeroService,
+        private location:Location,
+        private route:ActivatedRoute
+    ){}
+    heros:Hero;
+    ngOnInit():void {
+        this.route.params
+            .switchMap((params:Params) => this.heroService.getHero(+params['id']))
+            .subscribe(hero=> this.heros = hero);
+    }
+    goBack():void{
+        this.location.back();
+    }
 }
