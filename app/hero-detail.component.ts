@@ -20,7 +20,8 @@ import {Hero} from './hero';
 </div>
 <button (click)="goBack()">Back</button>
 </div>
-`
+`,
+    styleUrls:['hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit{
     constructor(
