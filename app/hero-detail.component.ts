@@ -2,7 +2,7 @@
  * Created by bimal on 11/19/16.
  */
 import {Component,OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Route, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {HeroService} from  './hero.service';
 import 'rxjs/add/operator/switchMap';
@@ -19,6 +19,7 @@ import {Hero} from './hero';
         <input type="text" name="name" [(ngModel)]="heros.name">
 </div>
 <button (click)="goBack()">Back</button>
+<button (click)="gotoheroes()">Go To Heroes</button>
 </div>
 `,
     styleUrls:['hero-detail.component.css']
@@ -27,7 +28,8 @@ export class HeroDetailComponent implements OnInit{
     constructor(
         private heroService:HeroService,
         private location:Location,
-        private route:ActivatedRoute
+        private route:ActivatedRoute,
+        private router:Router
     ){}
     heros:Hero;
     ngOnInit():void {
@@ -37,5 +39,8 @@ export class HeroDetailComponent implements OnInit{
     }
     goBack():void{
         this.location.back();
+    }
+    gotoheroes():void{
+        this.router.navigate(["../heroes"]);
     }
 }

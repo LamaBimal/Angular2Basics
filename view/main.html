@@ -6,7 +6,7 @@
 -->
 
 
-
+<h1>{{title}}</h1>
 <ul class="heroes">
     <li *ngFor="let hero of HEROES" (click)="onSelect(hero)" [class.selected]="hero===selectedHero"><span class="badge">{{hero.id}}</span><span>{{hero.name}}</span></li>
 </ul>
@@ -15,4 +15,6 @@
     {{selectedHero.name | uppercase}} is my hero
   </h2>
   <button (click)="gotoDetails()">View Details</button>
+    <a [routerLink]="['/dashboard/detail',selectedHero.id]">View Details here..</a>
+    <router-outlet></router-outlet>
 </div>

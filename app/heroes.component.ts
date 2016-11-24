@@ -81,6 +81,7 @@ export class HeroesComponent implements OnInit{
     id:1,
     name:"testingName"
 }
+    title:string= "Tour of Heroes";
 HEROES :Hero[]=[];
 ngOnInit():void{
     this.getHeroes();
@@ -98,7 +99,7 @@ constructor(private heroService:HeroService,
     }
 /*heroes = HEROES;*/
 gotoDetails():void{
-    this.router.navigate(['/detail',this.selectedHero.id]);
+    this.router.navigate(['dashboard/detail',this.selectedHero.id]);
 }
 
 }
